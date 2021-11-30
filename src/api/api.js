@@ -1,6 +1,10 @@
 import axios from "axios";
 
-export function getListHeroes(token) {
-    const url = `https://eu.api.blizzard.com/profile/user/wow?namespace=profile-eu&locale=ru_EU&access_token=${token}`;
-    return axios.get(url)
+export function getListHeroes() {
+    const url = ``;
+    return axios.get(url, {
+        headers: {
+            'Access-Control-Allow-Origin': 'https://api.vk.com/'
+        }
+    })
 }

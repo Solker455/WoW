@@ -2,6 +2,7 @@ import './App.css';
 import { Header } from './components/header';
 import { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
+import { Hero } from './components/hero';
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <div className="App">
+      <Hero />
       <Header loginClick={loginClick} logoutClick={logoutClick} />
     </div>
   );
