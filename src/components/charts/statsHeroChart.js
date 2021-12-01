@@ -2,13 +2,10 @@ import React from "react"
 import ReactECharts from 'echarts-for-react';
 
 export function StatsHeroChart() {
+
     let option = {
-        legend: {
-            data: ['Гонгрик', 'Горгомелл']
-        },
         radar: {
             indicator: [
-                { name: 'Ловкость', max: 2000 },
                 { name: 'Выносливость', max: 2000 },
                 { name: 'Скорость', max: 1000 },
                 { name: 'Искусность', max: 1000 },
@@ -22,11 +19,11 @@ export function StatsHeroChart() {
                 type: 'radar',
                 data: [
                     {
-                        value: [1107, 1897, 508, 140, 658, 585, 37940],
+                        value: [1897, 508, 140, 658, 585, 37940],
                         name: 'Гонгрик'
                     },
                     {
-                        value: [517, 731, 202, 114, 101, 273, 14620],
+                        value: [731, 202, 114, 101, 273, 14620],
                         name: 'Горгомелл'
                     }
                 ]
@@ -36,6 +33,14 @@ export function StatsHeroChart() {
     return (
         <div>
             <h1>Сравнение двух персонажей</h1>
+            <select>
+                <option>Гонгрик</option>
+                <option>Горгомелл</option>
+            </select>
+            <select>
+                <option>Горгомелл</option>
+                <option>Гонгрик</option>
+            </select>
             <ReactECharts
                 option={option}
                 notMerge={true}

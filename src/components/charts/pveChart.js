@@ -1,7 +1,13 @@
-import React from "react"
+import React, { useEffect } from "react"
 import ReactECharts from 'echarts-for-react';
+import { useDispatch, useSelector } from "react-redux";
 
 export function PveChart() {
+    let dispatch = useDispatch();
+    let pveStats = useSelector(state => state.pve.data)
+    useEffect(() => {
+        dispatch({ type: 'GET_PVESTATS' });
+    }, [dispatch]);
     let option = {
         tooltip: {
             trigger: 'item'
@@ -11,17 +17,7 @@ export function PveChart() {
                 name: 'Access From',
                 type: 'pie',
                 radius: '80%',
-                data: [
-                    { value: 2851.80, name: 'ПВЕ Драконы' },
-                    { value: 2484.59, name: 'Battle Crabs' },
-                    { value: 2357.30, name: 'Колхоз им Лунной Совы' },
-                    { value: 2214.35, name: 'Команда R' },
-                    { value: 2142.44, name: 'Vindicators crab club' },
-                    { value: 2049.80, name: 'Мимимифик' },
-                    { value: 1848.66, name: 'MFNP' },
-                    { value: 1815.52, name: 'Куб Кенария' },
-                    { value: 1120.36, name: 'Киберкотлеты' }
-                ],
+                data: pveStats,
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,

@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export function PvpChart() {
     let dispatch = useDispatch();
-    let loading = useSelector(state => state.pvp.loading);
     let pvpStats = useSelector(state => state.pvp.data)
-    console.log(pvpStats)
     useEffect(() => {
         dispatch({ type: 'GET_PVPSTATS' });
     }, [dispatch]);
