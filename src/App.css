@@ -32,7 +32,16 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.menu-block {
+  padding: 10px;
+}
+
+.link {
+  margin: 5px;
 }

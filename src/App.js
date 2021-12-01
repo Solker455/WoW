@@ -1,10 +1,10 @@
 import './App.css';
-import { Charts } from './components/charts';
+import { PublicRoute } from './routes/public';
 
 function App() {
   return (
     <div className="App">
-      <Charts />
+      <PublicRoute />
     </div>
   );
 }
