@@ -1,10 +1,6 @@
 import axios from "axios";
 
-export function getListHeroes() {
-    const url = ``;
-    return axios.get(url, {
-        headers: {
-            'Access-Control-Allow-Origin': 'https://api.vk.com/'
-        }
-    })
+export async function getPvpStats() {
+    const url = `https://api.lenskii.nomoredomains.icu/pvpstatistic`;
+    return await axios.get(url)
 }
