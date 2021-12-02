@@ -22,12 +22,12 @@ export function StatsHeroChart() {
         [heroName2, setHeroName2] = useState();
 
     const selectHero1 = function (event) {
-        setHeroStats1(data.heroes[event.target.value].value)
-        setHeroName1(data.heroes[event.target.value].name)
+        setHeroStats1(data.heroes[event].value)
+        setHeroName1(data.heroes[event].name)
     }
     const selectHero2 = function (event) {
-        setHeroStats2(data.heroes[event.target.value].value)
-        setHeroName2(data.heroes[event.target.value].name)
+        setHeroStats2(data.heroes[event].value)
+        setHeroName2(data.heroes[event].name)
     }
     let option = {
         radar: {
@@ -40,6 +40,16 @@ export function StatsHeroChart() {
                 { name: 'Здоровье', max: 50000 },
             ]
         },
+        textStyle: {
+            color: '#ebdec2',
+            fontWeight: 'bold',
+            fontSize: 18,
+            textBorderColor: '#000',
+            textBorderWidth: '3',
+            textBorderType: 'solid'
+
+        },
+        color: ['#d37f00', '#e63244'],
         series: [
             {
                 type: 'radar',

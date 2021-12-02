@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import ReactECharts from 'echarts-for-react';
 import { useDispatch, useSelector } from "react-redux";
+import { Table } from 'antd';
 
 export function PvpChart() {
     let dispatch = useDispatch();
@@ -8,23 +9,28 @@ export function PvpChart() {
     useEffect(() => {
         dispatch({ type: 'GET_PVPSTATS' });
     }, [dispatch]);
+    let names = pvpStats.map((item) => {
+        return (item.name)
+    })
     let option = {
-        tooltip: {
-            trigger: 'item'
+        xAxis: {
+            type: 'category',
+            data: names
+        },
+        textStyle: {
+            color: '#ebdec2',
+            fontWeight: 'bold',
+            fontSize: 16
+
+        },
+        color: '#d37f00',
+        yAxis: {
+            type: 'value'
         },
         series: [
             {
-                name: 'Access From',
-                type: 'pie',
-                radius: '80%',
-                data: pvpStats,
-                emphasis: {
-                    itemStyle: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
+                type: 'bar',
+                data: pvpStats
             }
         ]
     };
@@ -35,7 +41,6 @@ export function PvpChart() {
                 option={option}
                 notMerge={true}
                 lazyUpdate={true}
-                theme={"theme_name"}
             />
         </div>
     )

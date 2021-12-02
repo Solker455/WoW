@@ -4,6 +4,7 @@ import { PveChart } from "../components/charts/pveChart";
 import { PvpChart } from "../components/charts/pvpChart";
 import { StatsHeroChart } from "../components/charts/statsHeroChart";
 import { Header } from "../components/header";
+import { Footer } from "../components/footer";
 
 export function PublicRoute() {
     return (
@@ -14,5 +15,6 @@ export function PublicRoute() {
                 <Route path="/pvpstats" element={<PvpChart />} />
                 <Route path="/statshero" element={<StatsHeroChart />} />
             </Routes>
+            <Footer />
         </div>)
 }
