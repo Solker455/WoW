@@ -2,13 +2,15 @@ import { applyMiddleware, createStore, combineReducers } from "redux";
 import createSagaMiddleware from "@redux-saga/core";
 import { pvpStatsReducer } from "./reducers/pvpStatsReducer.js";
 import { pveStatsReducer } from "./reducers/pveStatsReducer.js";
+import { registerReducer } from "./reducers/registerReducer.js";
 import rootSaga from "./watchers.js";
 
 const sagaMiddleware = createSagaMiddleware()
 
 const rootReducer = combineReducers({
     pvp: pvpStatsReducer,
-    pve: pveStatsReducer
+    pve: pveStatsReducer,
+    reg: registerReducer
 })
 
 export const store = createStore(rootReducer,

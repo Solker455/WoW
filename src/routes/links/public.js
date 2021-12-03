@@ -5,6 +5,8 @@ export function PublicLink() {
     return (
         <ul className="menu">
             <li className="link"><Link className="link-item" to="/">Главная</Link></li>
+            <li className="link"><Link className="link-item" to="/login">Вход</Link></li>
+            <li className="link"><Link className="link-item" to="/register">Регистрация</Link></li>
             <li className="link"><Link className="link-item" to="/pvpstats">PvP статистика</Link></li>
             <li className="link"><Link className="link-item" to="/pvestats">PvE статистика</Link></li>
             <li className="link"><Link className="link-item" to="/statshero">Сравнение персонажей</Link></li>
