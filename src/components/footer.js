@@ -1,5 +1,5 @@
-import React from "react";
+let year = new Date().getFullYear()
 
 export function Footer() {
-    return (<div className='footer'>© WoWSite 2021</div>)
+    return (<div className='footer'>© WoWSite {year}</div>)
 }

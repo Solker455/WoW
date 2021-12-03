@@ -30,7 +30,7 @@ export function PveChart() {
                     itemStyle: {
                         shadowBlur: 10,
                         shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        shadowColor: '#ebdec2'
                     }
                 }
             }

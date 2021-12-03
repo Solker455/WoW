@@ -162,3 +162,11 @@ a:hover {
 .loginForm {
   margin-top: 50px;
 }
+.ant-table-wrapper {
+  width: 70% !important;
+  margin: 50px auto;
+}
+.echarts-for-react {
+  height: 600px !important;
+  margin-top: 50px;
+}

@@ -20,12 +20,15 @@ export function PvpChart() {
         textStyle: {
             color: '#ebdec2',
             fontWeight: 'bold',
-            fontSize: 16
-
+            textBorderColor: '#000',
+            textBorderWidth: '3',
+            textBorderType: 'solid'
         },
         color: '#d37f00',
+        height: 500,
         yAxis: {
-            type: 'value'
+            splitNumber: 8,
+            type: 'value',
         },
         series: [
             {

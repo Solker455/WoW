@@ -38,7 +38,9 @@ export function StatsHeroChart() {
                 { name: 'Универсальность', max: 1000 },
                 { name: 'Критический удар', max: 1000 },
                 { name: 'Здоровье', max: 50000 },
-            ]
+            ],
+            shape: 'circle',
+            radius: '85%',
         },
         textStyle: {
             color: '#ebdec2',
