@@ -1,15 +1,21 @@
-.App {
-  text-align: center;
-}
 body {
   background-image: url(./images/background-main.webp);
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+#root {
+  position: relative;
+	min-height: 100%;
 }
 ul {
   margin: 0 !important;
   list-style: none !important;
   padding: 0 !important;
+}
+.App {
+  text-align: center;
+  padding-bottom: 90px;
 }
 
 .App-logo {
@@ -44,6 +50,8 @@ ul {
     height: 80px;
     align-items: center;
     display: flex;
+    border: #002750;
+    border-bottom-style:solid;
 }
 .logo {
   background-image: url(././images/wowlogo.png);
@@ -111,10 +119,15 @@ h1 {
   padding: 20px;
   background-image: url(././images/header.webp);
     height: 50px;
-    margin: 0;
-    position:fixed;
-    bottom:0;
     width: 100%;
     text-align: center;
     color: #ebdec2;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border: #002750;
+    border-top-style:solid;
+}
+a:hover {
+  color:#d37f00 !important;
 }
