@@ -12,7 +12,7 @@ export function Login() {
         // dispatch({ type: 'SET_LOGIN', payload: input });
     }
     return (
-        <div className='loginForm'>
+        <div >
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input className="input" {...register("email",
                     {

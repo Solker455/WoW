@@ -156,7 +156,7 @@ a:hover {
 }
 .error {
   font-size: 14pt;
-  color: brown;
+  color: #ebdec2;
   font-weight: bold;
 }
 .loginForm {
