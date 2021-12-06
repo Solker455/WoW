@@ -3,15 +3,17 @@ import ReactECharts from 'echarts-for-react';
 import { SelectHero } from "../component/selectHero";
 import { getCharacterStats, getHeroUser } from "../../api/api";
 import { message } from 'antd';
+import { TableStatsHero } from "../component/tableStatsHero";
 
 export function StatsHeroChart() {
     let [listCharacters, setListCharacters] = useState([])
     let [listRealms, setListRealms] = useState([])
-    let [loading, setLoading] = useState(false)
     let [heroStats1, setHeroStats1] = useState([]),
         [heroStats2, setHeroStats2] = useState([]),
         [heroName1, setHeroName1] = useState(),
-        [heroName2, setHeroName2] = useState();
+        [heroName2, setHeroName2] = useState(),
+        [classTableStats1, setClassTableStats1] = useState('classTableStatsOff'),
+        [classTableStats2, setClassTableStats2] = useState('classTableStatsOff');
 
     const selectHero1 = function (event) {
         let copyHeroStats1 = Object.assign([], ...heroStats1);
@@ -19,6 +21,7 @@ export function StatsHeroChart() {
             setHeroName1(listCharacters[event])
             copyHeroStats1.push(response.data.stamina.effective, response.data.spell_haste.rating, response.data.mastery.rating, response.data.versatility, response.data.spell_crit.rating, response.data.health)
             setHeroStats1(copyHeroStats1)
+            setClassTableStats1('tableStats1')
         }).catch(() => {
             message.info('Произошла ошибка, персонаж долгое время был неактивен.');
         })
@@ -29,6 +32,7 @@ export function StatsHeroChart() {
             setHeroName2(listCharacters[event])
             copyHeroStats2.push(response.data.stamina.effective, response.data.spell_haste.rating, response.data.mastery.rating, response.data.versatility, response.data.spell_crit.rating, response.data.health)
             setHeroStats2(copyHeroStats2)
+            setClassTableStats2('tableStats2')
         }).catch(() => {
             message.info('Произошла ошибка, персонаж долгое время был неактивен.');
         })
@@ -44,7 +48,6 @@ export function StatsHeroChart() {
                 { name: 'Здоровье', max: 50000 },
             ],
             shape: 'circle',
-            radius: '85%',
         },
         textStyle: {
             color: '#ebdec2',
@@ -84,22 +87,24 @@ export function StatsHeroChart() {
             })
             setListCharacters(copyListCharacters)
             setListRealms(copyListRealms)
-            setLoading(true)
         })
     }, [])
 
     return (
-        <div>
-            <h1>Сравнение двух персонажей</h1>
+        <div class='chartStats'>
+            <TableStatsHero class={classTableStats1} data={heroStats1} />
+            <div className='chartStatsBlock'>
+                <SelectHero selectHero1={selectHero1} selectHero2={selectHero2} listCharacters={listCharacters} />
+                <ReactECharts
+                    option={option}
+                    notMerge={true}
+                    lazyUpdate={true}
+                    theme={"theme_name"}
+                />
 
-            <SelectHero selectHero1={selectHero1} selectHero2={selectHero2} listCharacters={listCharacters} />
+            </div>
 
-            <ReactECharts
-                option={option}
-                notMerge={true}
-                lazyUpdate={true}
-                theme={"theme_name"}
-            />
+            <TableStatsHero class={classTableStats2} data={heroStats2} />
         </div>
     )
 }

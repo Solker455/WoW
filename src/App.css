@@ -181,3 +181,23 @@ a:hover {
   font-weight: bold;
   color: #d37f00;
 }
+.tableStats1 {
+  width: 300px;
+  visibility: visible;
+}
+.tableStats2 {
+  width: 300px;
+  visibility: visible;
+}
+.chartStatsBlock {
+  width: 800px;
+}
+.chartStats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 50px;
+}
+.classTableStatsOff {
+  visibility: hidden;
+}
