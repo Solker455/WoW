@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export async function getPvpStats() {
-    const url = `https://api.lenskii.nomoredomains.icu/pvpstatistic`;
+export async function getPvpStats(token) {
+    const url = `https://eu.api.blizzard.com/data/wow/pvp-season/31/pvp-leaderboard/2v2?namespace=dynamic-eu&locale=ru_EU&access_token=${token}`;
     return axios.get(url)
 }
 

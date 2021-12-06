@@ -1,13 +1,17 @@
 import React, { useEffect } from "react"
 import ReactECharts from 'echarts-for-react';
 import { useDispatch, useSelector } from "react-redux";
-import { Table } from 'antd';
+import { getPvpStats } from "../../api/api";
 
 export function PvpChart() {
     let dispatch = useDispatch();
     let pvpStats = useSelector(state => state.pvp.data)
     useEffect(() => {
-        dispatch({ type: 'GET_PVPSTATS' });
+        getPvpStats(localStorage.token).then((response) => {
+            response.data.entries.map((item) => {
+                console.log(item.rating)
+            })
+        })
     }, [dispatch]);
     let names = pvpStats.map((item) => {
         return (item.name)
