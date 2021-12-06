@@ -49,7 +49,6 @@ ul {
   background-image: url(././images/header.webp);
     height: 80px;
     align-items: center;
-    display: flex;
     border: #002750;
     border-bottom-style:solid;
 }
@@ -59,11 +58,12 @@ ul {
   height: 50px;
   background-size: contain;
   background-repeat: no-repeat;
-
+  float: left;
 }
 .menu {
   display: flex;
-  align-items: center;
+  float: left;
+  padding-top: 10px !important;
 }
 
 .link-item {
@@ -76,9 +76,6 @@ ul {
 .link {
   margin: 0 16px;
   
-}
-.logo {
-  flex: 0 0 auto;
 }
 h1 {
   color: #ebdec2 !important;
@@ -169,4 +166,18 @@ a:hover {
 .echarts-for-react {
   height: 600px !important;
   margin-top: 50px;
+}
+.buttonAuth {
+  float: right;
+}
+.userBlock {
+  float:right;
+}
+.battleTag {
+  float: left;
+  padding-right: 20px;
+  font-size: 16pt;
+  padding-top: 1px;
+  font-weight: bold;
+  color: #d37f00;
 }

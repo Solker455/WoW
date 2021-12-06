@@ -1,19 +1,30 @@
 import { useState } from 'react';
-import { apiToken } from './api/api';
 import './App.css';
 import { PublicRoute } from './routes/public';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { PrivateRoute } from './routes/private';
 
 function App() {
-  let [code, setCode] = useState(window.location.search.replace('?code=', ''))
-  if (code) {
-    let token = apiToken(code)
-    console.log(token)
+  let [token, setToken] = useState(window.location.search.replace('?access_token=', ''));
+  let dispatch = useDispatch();
+  if (token) {
+    dispatch({ type: 'SET_TOKEN', token });
   }
-  return (
-    <div className="App">
-      <PublicRoute />
-    </div>
-  );
+  let auth = useSelector(state => state.auth.auth)
+  if (auth) {
+    return (
+      <div className="App">
+        <PrivateRoute />
+      </div>
+    )
+  } else {
+    return (
+      <div className="App">
+        <PublicRoute />
+      </div>
+    );
+  }
 }
 
 export default App;
