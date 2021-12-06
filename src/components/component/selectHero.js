@@ -3,12 +3,10 @@ import { Select } from 'antd';
 const { Option } = Select;
 
 export function SelectHero(props) {
-
     let options;
-    options = props.data.map((item) => {
-        return (<Option className='option' key={item.id} value={item.id - 1}>{item.name}</Option>)
+    options = props.listCharacters.map((item, key) => {
+        return (<Option className='option' key={key} value={key}>{item}</Option>)
     })
-
 
     return (
         <div className='selectsPvpStats'>

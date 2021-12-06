@@ -1,33 +1,37 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import ReactECharts from 'echarts-for-react';
 import { SelectHero } from "../component/selectHero";
+import { getCharacterStats, getHeroUser } from "../../api/api";
+import { message } from 'antd';
 
 export function StatsHeroChart() {
-    let data = {
-        heroes: [
-            { id: '1', name: 'Гонгрик', value: [1897, 508, 140, 658, 585, 37940] },
-            { id: '2', name: 'Горгомелл', value: [112, 202, 114, 101, 273, 14620] },
-            { id: '3', name: 'Алексееей', value: [752, 344, 155, 544, 544, 25444] },
-            { id: '4', name: 'Герцог', value: [578, 321, 112, 177, 500, 28245] },
-            { id: '5', name: 'Язаспиной', value: [977, 300, 100, 285, 475, 29245] },
-            { id: '6', name: 'Убиватор', value: [1052, 255, 98, 297, 411, 35544] },
-            { id: '7', name: 'Магохил', value: [1574, 243, 115, 287, 421, 38725] },
-            { id: '8', name: 'Силушка', value: [447, 277, 118, 300, 430, 48852] },
-            { id: '9', name: 'Уничтожитор', value: [155, 271, 120, 544, 150, 27455] }
-        ]
-    }
-    let [heroStats1, setHeroStats1] = useState(),
-        [heroStats2, setHeroStats2] = useState(),
+    let [listCharacters, setListCharacters] = useState([])
+    let [listRealms, setListRealms] = useState([])
+    let [loading, setLoading] = useState(false)
+    let [heroStats1, setHeroStats1] = useState([]),
+        [heroStats2, setHeroStats2] = useState([]),
         [heroName1, setHeroName1] = useState(),
         [heroName2, setHeroName2] = useState();
 
     const selectHero1 = function (event) {
-        setHeroStats1(data.heroes[event].value)
-        setHeroName1(data.heroes[event].name)
+        let copyHeroStats1 = Object.assign([], ...heroStats1);
+        getCharacterStats(localStorage.token, listCharacters[event].toLowerCase(), listRealms[event]).then((response) => {
+            setHeroName1(listCharacters[event])
+            copyHeroStats1.push(response.data.stamina.effective, response.data.spell_haste.rating, response.data.mastery.rating, response.data.versatility, response.data.spell_crit.rating, response.data.health)
+            setHeroStats1(copyHeroStats1)
+        }).catch(() => {
+            message.info('Произошла ошибка, персонаж долгое время был неактивен.');
+        })
     }
     const selectHero2 = function (event) {
-        setHeroStats2(data.heroes[event].value)
-        setHeroName2(data.heroes[event].name)
+        let copyHeroStats2 = Object.assign([], ...heroStats2);
+        getCharacterStats(localStorage.token, listCharacters[event].toLowerCase(), listRealms[event]).then((response) => {
+            setHeroName2(listCharacters[event])
+            copyHeroStats2.push(response.data.stamina.effective, response.data.spell_haste.rating, response.data.mastery.rating, response.data.versatility, response.data.spell_crit.rating, response.data.health)
+            setHeroStats2(copyHeroStats2)
+        }).catch(() => {
+            message.info('Произошла ошибка, персонаж долгое время был неактивен.');
+        })
     }
     let option = {
         radar: {
@@ -68,11 +72,27 @@ export function StatsHeroChart() {
             }
         ]
     };
+    useEffect(() => {
+        getHeroUser(localStorage.token).then(response => {
+            let copyListCharacters = Object.assign([], listCharacters);
+            let copyListRealms = Object.assign([], listRealms);
+            response.data.wow_accounts.map((item) => {
+                return (item.characters.map((item) => {
+                    copyListCharacters.push(item.name)
+                    copyListRealms.push(item.realm.slug)
+                }))
+            })
+            setListCharacters(copyListCharacters)
+            setListRealms(copyListRealms)
+            setLoading(true)
+        })
+    }, [])
+
     return (
         <div>
             <h1>Сравнение двух персонажей</h1>
 
-            <SelectHero selectHero1={selectHero1} selectHero2={selectHero2} data={data.heroes} />
+            <SelectHero selectHero1={selectHero1} selectHero2={selectHero2} listCharacters={listCharacters} />
 
             <ReactECharts
                 option={option}

@@ -1,37 +1,32 @@
 const initialAuth = {
-    auth: false,
-    token: null,
+    auth: localStorage.auth,
+    token: localStorage.token,
     loading: false,
-    battletag: null
+    battletag: localStorage.battletag
 }
 
 export const authReducer = function (state = initialAuth, action) {
     switch (action.type) {
         case 'LOAD_TOKEN': {
+            localStorage.token = action.token
+            localStorage.auth = true
             return {
                 ...state,
-                auth: true,
-                token: action.token,
+                auth: localStorage.auth,
+                token: localStorage.token,
             }
         }
         case 'LOAD_BATTLETAG': {
+            localStorage.battletag = action.battletag
             return {
                 ...state,
-                battletag: action.battletag,
+                battletag: localStorage.battletag,
             }
         }
         case 'LOADING_AUTH': {
             return {
                 ...state,
                 loading: state.loading ? false : true
-            }
-        }
-        case 'LOGOUT': {
-            document.location.href = 'http://localhost:3000';
-            return {
-                ...state,
-                auth: false,
-                token: null
             }
         }
         default: return state;

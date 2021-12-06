@@ -10,7 +10,8 @@ const sagaMiddleware = createSagaMiddleware()
 const rootReducer = combineReducers({
     pvp: pvpStatsReducer,
     pve: pveStatsReducer,
-    auth: authReducer
+    auth: authReducer,
+    
 })
 
 export const store = createStore(rootReducer,

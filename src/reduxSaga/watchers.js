@@ -7,7 +7,6 @@ function* watchSaga() {
     yield takeEvery('GET_PVPSTATS', getPvpStatsSaga);
     yield takeEvery('GET_PVESTATS', getPveStatsSaga);
     yield takeEvery('SET_TOKEN', authSaga);
-    yield takeEvery('LOGOUT', authSaga);
 }
 
 export default function* rootSaga() {

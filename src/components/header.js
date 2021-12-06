@@ -3,15 +3,16 @@ import { PublicLink } from "../routes/links/public";
 import { useSelector } from "react-redux";
 import { PrivateLink } from "../routes/links/private";
 import { Button } from "antd";
-import { useDispatch } from "react-redux";
 import { apiCode } from "../api/api";
 
 export function Header() {
     let auth = useSelector(state => state.auth.auth)
-    let dispatch = useDispatch();
     let battletag = useSelector(state => state.auth.battletag)
     const onClickLogout = function () {
-        dispatch({ type: 'LOGOUT' });
+        localStorage.removeItem('token');
+        localStorage.removeItem('auth');
+        localStorage.removeItem('battletag');
+        document.location.href = 'http://localhost:3000';
     }
     const onClickLogin = function () {
         apiCode()

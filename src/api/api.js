@@ -21,5 +21,10 @@ export async function apiUserInfo(token) {
 
 export async function getHeroUser(token) {
     const url = `https://eu.api.blizzard.com/profile/user/wow?namespace=profile-eu&locale=ru_EU&access_token=${token}`;
-    return axios.get(url)
+    return await axios.get(url)
+}
+
+export async function getCharacterStats(token, name, realm) {
+    const url = `https://eu.api.blizzard.com/profile/wow/character/${realm}/${name}/statistics?namespace=profile-eu&locale=ru_EU&access_token=${token}`;
+    return await axios.get(url)
 }
