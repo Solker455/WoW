@@ -1,21 +1,35 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import ReactECharts from 'echarts-for-react';
-import { useDispatch, useSelector } from "react-redux";
-import { Table } from 'antd';
+import { getPvpStats } from "../../api/api";
+import { Select } from 'antd';
+
+const { Option } = Select;
 
 export function PvpChart() {
-    let dispatch = useDispatch();
-    let pvpStats = useSelector(state => state.pvp.data)
+    let [pvpStats, setPvpStats] = useState([])
+    let [pvpName, setPvpName] = useState([])
+    let [pvpLadder, setPvpLadder] = useState('2v2')
     useEffect(() => {
-        dispatch({ type: 'GET_PVPSTATS' });
-    }, [dispatch]);
-    let names = pvpStats.map((item) => {
-        return (item.name)
-    })
+        getPvpStats(localStorage.token, pvpLadder).then((response) => {
+            setPvpStats(response.data.entries.slice(0, 11).map((item) => {
+                return (item.rating)
+            }))
+            setPvpName(response.data.entries.slice(0, 11).map((item) => {
+                return (item.character.name)
+            }))
+        })
+    }, [pvpLadder]);
+
+    const selectPvpLadder = function (event) {
+        setPvpLadder(event)
+    }
+
     let option = {
-        xAxis: {
-            type: 'category',
-            data: names
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
         },
         textStyle: {
             color: '#ebdec2',
@@ -25,21 +39,36 @@ export function PvpChart() {
             textBorderType: 'solid'
         },
         color: '#d37f00',
-        height: 500,
-        yAxis: {
-            splitNumber: 8,
-            type: 'value',
-        },
+        xAxis: [
+            {
+                type: 'category',
+                data: pvpName,
+                axisTick: {
+                    alignWithLabel: true
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
         series: [
             {
+                name: 'Рейтинг',
                 type: 'bar',
+                barWidth: '60%',
                 data: pvpStats
             }
         ]
     };
     return (
         <div>
-            <h1>Топ 10 в мире PvP убийств</h1>
+            <h1 className='titleStats'>Таблица лидеров арены PvP</h1>
+            <Select defaultValue='2v2' onChange={selectPvpLadder}>
+                <Option value='2v2'>2v2</Option>
+                <Option value='3v3'>3v3</Option>
+            </Select>
             <ReactECharts
                 option={option}
                 notMerge={true}

@@ -40,11 +40,11 @@ export function StatsHeroChart() {
     let option = {
         radar: {
             indicator: [
-                { name: 'Выносливость', max: 2000 },
-                { name: 'Скорость', max: 1000 },
-                { name: 'Искусность', max: 1000 },
-                { name: 'Универсальность', max: 1000 },
-                { name: 'Критический удар', max: 1000 },
+                { name: 'Выносливость', max: 2500 },
+                { name: 'Скорость', max: 2000 },
+                { name: 'Искусность', max: 2000 },
+                { name: 'Универсальность', max: 2000 },
+                { name: 'Критический удар', max: 2000 },
                 { name: 'Здоровье', max: 50000 },
             ],
             shape: 'circle',
@@ -91,7 +91,7 @@ export function StatsHeroChart() {
     }, [])
 
     return (
-        <div class='chartStats'>
+        <div className='chartStats'>
             <TableStatsHero class={classTableStats1} data={heroStats1} />
             <div className='chartStatsBlock'>
                 <SelectHero selectHero1={selectHero1} selectHero2={selectHero2} listCharacters={listCharacters} />

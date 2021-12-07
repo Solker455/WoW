@@ -1,5 +1,5 @@
 body {
-  background-image: url(./images/background-main.webp);
+  background-image: url(./images/background-main.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -183,11 +183,13 @@ a:hover {
 }
 .tableStats1 {
   width: 300px;
-  visibility: visible;
+  opacity: 100%;
+  animation: opacityTableStats  1s;
 }
 .tableStats2 {
   width: 300px;
-  visibility: visible;
+  opacity: 100%;
+  animation: opacityTableStats  1s;
 }
 .chartStatsBlock {
   width: 800px;
@@ -199,5 +201,17 @@ a:hover {
   padding-top: 50px;
 }
 .classTableStatsOff {
-  visibility: hidden;
+  opacity: 0%;
+  width: 300px;
+}
+@keyframes opacityTableStats {
+  from {opacity: 0%;}
+  to {opacity: 100%;}
+  }
+.titleStats {
+  display: inline-block;
+  padding-right: 20px;
+}
+.selectFraction {
+  padding-right: 10px !important;
 }

@@ -1,12 +1,12 @@
 import axios from "axios";
 
-export async function getPvpStats() {
-    const url = `https://api.lenskii.nomoredomains.icu/pvpstatistic`;
+export async function getPvpStats(token, pvpLadder) {
+    const url = `https://eu.api.blizzard.com/data/wow/pvp-season/31/pvp-leaderboard/${pvpLadder}?namespace=dynamic-eu&locale=ru_EU&access_token=${token}`;
     return axios.get(url)
 }
 
-export async function getPveStats() {
-    const url = `https://api.lenskii.nomoredomains.icu/mythicstatistic`;
+export async function getPveStats(token, fraction, raid) {
+    const url = `https://eu.api.blizzard.com/data/wow/leaderboard/hall-of-fame/${raid}/${fraction}?namespace=dynamic-eu&locale=ru_EU&access_token=${token}`;
     return axios.get(url)
 }
 
