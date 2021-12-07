@@ -71,8 +71,6 @@ export function PvpChart() {
             </Select>
             <ReactECharts
                 option={option}
-                notMerge={true}
-                lazyUpdate={true}
             />
         </div>
     )

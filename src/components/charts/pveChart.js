@@ -134,9 +134,6 @@ export function PveChart() {
             <Table className='tablePveStats' dataSource={data} columns={columns} pagination={false} rowKey='rank' loading={loading} />
             <ReactECharts
                 option={option}
-                notMerge={true}
-                lazyUpdate={true}
-                theme={"theme_name"}
             />
         </div>
     )

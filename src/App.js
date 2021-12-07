@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './App.css';
 import { PublicRoute } from './routes/public';
 import { useDispatch } from 'react-redux';
@@ -6,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { PrivateRoute } from './routes/private';
 
 function App() {
-  let [token, setToken] = useState(window.location.search.replace('?access_token=', ''));
+  let token = window.location.search.replace('?access_token=', '');
   let dispatch = useDispatch();
   if (token) {
     dispatch({ type: 'SET_TOKEN', token });
