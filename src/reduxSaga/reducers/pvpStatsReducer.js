@@ -8,7 +8,8 @@ export const pvpStatsReducer = function (state = initialStats, action) {
         case 'LOAD_PVPSTATS': {
             return {
                 ...state,
-                data: action.pvpstats
+                pvpStats: action.stats,
+                pvpNames: action.names
             }
         }
         case 'LOADING_PVPSTATS': {

@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react"
 import ReactECharts from 'echarts-for-react';
-import { getPvpStats } from "../../api/api";
 import { Select } from 'antd';
+import { useDispatch, useSelector } from "react-redux";
 
 const { Option } = Select;
 
 export function PvpChart() {
-    let [pvpStats, setPvpStats] = useState([])
-    let [pvpName, setPvpName] = useState([])
     let [pvpLadder, setPvpLadder] = useState('2v2')
+    let dispatch = useDispatch();
+    let pvpStats = useSelector(state => state.pvp.pvpStats)
+    let pvpName = useSelector(state => state.pvp.pvpNames)
     useEffect(() => {
-        getPvpStats(localStorage.token, pvpLadder).then((response) => {
-            setPvpStats(response.data.entries.slice(0, 11).map((item) => {
-                return (item.rating)
-            }))
-            setPvpName(response.data.entries.slice(0, 11).map((item) => {
-                return (item.character.name)
-            }))
-        })
-    }, [pvpLadder]);
+        dispatch({ type: 'GET_PVPSTATS', pvpLadder });
+    }, [dispatch, pvpLadder]);
 
     const selectPvpLadder = function (event) {
         setPvpLadder(event)

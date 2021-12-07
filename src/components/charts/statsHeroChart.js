@@ -38,6 +38,18 @@ export function StatsHeroChart() {
         })
     }
     let option = {
+        legend: {
+            data: [heroName1, heroName2],
+            textStyle: {
+                color: '#ebdec2',
+                fontWeight: 'bold',
+                fontSize: 18,
+                textBorderColor: '#000',
+                textBorderWidth: '3',
+                textBorderType: 'solid'
+    
+            }
+          },
         radar: {
             indicator: [
                 { name: 'Выносливость', max: 2500 },
@@ -97,13 +109,9 @@ export function StatsHeroChart() {
                 <SelectHero selectHero1={selectHero1} selectHero2={selectHero2} listCharacters={listCharacters} />
                 <ReactECharts
                     option={option}
-                    notMerge={true}
-                    lazyUpdate={true}
-                    theme={"theme_name"}
                 />
 
             </div>
-
             <TableStatsHero class={classTableStats2} data={heroStats2} />
         </div>
     )

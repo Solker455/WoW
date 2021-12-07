@@ -14,12 +14,10 @@ export function SelectHero(props) {
                 <Option value='default' disabled>Выберите героя</Option>
                 {options}
             </Select>
-            <div className='colorPvpStats1'></div>
             <Select defaultValue='default' onChange={props.selectHero2} className='selectPvpStats2'>
                 <Option value='default' disabled>Выберите героя</Option>
                 {options}
             </Select>
-            <div className='colorPvpStats2'></div>
         </div>
     )
 }

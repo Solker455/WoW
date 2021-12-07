@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react"
 import ReactECharts from 'echarts-for-react';
 import { Table } from 'antd';
-import { getPveStats } from "../../api/api";
 import moment from "moment";
 import 'moment/locale/ru';
 import { Select } from 'antd';
+import { useDispatch, useSelector } from "react-redux";
 
 const { Option } = Select;
 
 export function PveChart() {
-    let [pveStats, setPveStats] = useState()
-    let [pveNames, setNames] = useState()
-    let [data, setData] = useState()
-    let [loading, setLoading] = useState(true)
     let [fraction, setFraction] = useState('horde')
     let [raid, setRaid] = useState('castle-nathria')
-
+    let dispatch = useDispatch();
+    let pveStats = useSelector(state => state.pve.stats)
+    let pveNames = useSelector(state => state.pve.names)
+    let dataTable = useSelector(state => state.pve.data)
+    let loading = useSelector(state => state.pve.loading)
     moment.locale('ru')
     const selectFraction = function (event) {
         setFraction(event)
@@ -25,29 +25,8 @@ export function PveChart() {
     }
 
     useEffect(() => {
-        getPveStats(localStorage.token, fraction, raid).then((response) => {
-            setPveStats(response.data.entries.slice(0, 10).map((item) => {
-                setLoading(false)
-                return (
-                    item.rank
-                )
-            }))
-            setNames(response.data.entries.slice(0, 10).map((item) => {
-                return (
-                    item.guild.name
-                )
-            }))
-            setData(response.data.entries.slice(0, 10).map((item) => {
-                return {
-                    rank: item.rank,
-                    name: item.guild.name,
-                    time: moment(item.timestamp).format('Do MMMM YYYY'),
-                    fraction: item.faction.type,
-                    region: item.region
-                }
-            }))
-        })
-    }, [loading, fraction, raid]);
+        dispatch({ type: 'GET_PVESTATS', fraction, raid });
+    }, [dispatch, fraction, raid]);
     let option = {
         tooltip: {
             trigger: 'axis',
@@ -131,7 +110,7 @@ export function PveChart() {
                 <Option value='castle-nathria'>Замок Нафрия</Option>
                 <Option value='sanctum-of-domination'>Святилище Господства</Option>
             </Select>
-            <Table className='tablePveStats' dataSource={data} columns={columns} pagination={false} rowKey='rank' loading={loading} />
+            <Table className='tablePveStats' dataSource={dataTable} columns={columns} pagination={false} rowKey='rank' loading={loading} />
             <ReactECharts
                 option={option}
             />

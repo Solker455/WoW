@@ -1,9 +1,15 @@
 import { put, call } from 'redux-saga/effects'
 import { getPvpStats } from '../../api/api'
 
-export function* getPvpStatsSaga() {
-    const data = yield call(getPvpStats)
+export function* getPvpStatsSaga(state) {
     yield put({ type: 'LOADING_PVPSTATS' })
-    yield put({ type: 'LOAD_PVPSTATS', pvpstats: data.data })
+    const response = yield call(getPvpStats, localStorage.token, state.pvpLadder)
+    let pvpStats = response.data.entries.slice(0, 11).map((item) => {
+        return (item.rating)
+    })
+    let pvpNames = response.data.entries.slice(0, 11).map((item) => {
+        return (item.character.name)
+    })
+    yield put({ type: 'LOAD_PVPSTATS', stats: pvpStats, names: pvpNames })
     yield put({ type: 'LOADING_PVPSTATS' })
 }

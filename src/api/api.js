@@ -28,3 +28,13 @@ export async function getCharacterStats(token, name, realm) {
     const url = `https://eu.api.blizzard.com/profile/wow/character/${realm}/${name}/statistics?namespace=profile-eu&locale=ru_EU&access_token=${token}`;
     return await axios.get(url)
 }
+
+export async function test() {
+    const url = `https://victorymuseum.ru/bitrix/tools/vasoft_likeit_like.php?ID=111014`;
+    return await axios.get(url, {
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        }
+    })
+}
+
