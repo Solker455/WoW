@@ -1,12 +1,17 @@
 import { Select } from 'antd';
+import { useSelector } from 'react-redux';
 
 const { Option } = Select;
 
 export function SelectHero(props) {
+    let listCharacters = useSelector(state => state.stats.names)
+    let loading = useSelector(state => state.stats.loadingList)
     let options;
-    options = props.listCharacters.map((item, key) => {
-        return (<Option className='option' key={key} value={key}>{item}</Option>)
-    })
+    if (loading) {
+        options = listCharacters.map((item, key) => {
+            return (<Option className='option' key={key} value={key}>{item}</Option>)
+        })
+    }
 
     return (
         <div className='selectsPvpStats'>

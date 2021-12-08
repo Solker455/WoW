@@ -29,12 +29,3 @@ export async function getCharacterStats(token, name, realm) {
     return await axios.get(url)
 }
 
-export async function test() {
-    const url = `https://victorymuseum.ru/bitrix/tools/vasoft_likeit_like.php?ID=111014`;
-    return await axios.get(url, {
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        }
-    })
-}
-

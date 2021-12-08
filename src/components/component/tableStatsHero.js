@@ -3,8 +3,8 @@ import { Table } from 'antd';
 
 export function TableStatsHero(props) {
     let listNameStats = ['Выносливость', 'Скорость', 'Искусность', 'Универсальность', 'Критический удар', 'Здоровье']
-
-    let data = listNameStats.map((item, key) => {
+    let data;
+    data = listNameStats.map((item, key) => {
         return {
             name: item,
             value: props.data[key]

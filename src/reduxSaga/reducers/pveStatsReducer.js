@@ -1,6 +1,8 @@
 const initialStats = {
     loading: false,
-    data: []
+    data: null,
+    names: null,
+    stats: null
 }
 
 export const pveStatsReducer = function (state = initialStats, action) {
@@ -8,9 +10,9 @@ export const pveStatsReducer = function (state = initialStats, action) {
         case 'LOAD_PVESTATS': {
             return {
                 ...state,
-                stats: action.stats,
-                names: action.names,
-                data: action.dataTable
+                pveStats: action.stats,
+                pveNames: action.names,
+                dataTable: action.dataTable
             }
         }
         case 'LOADING_PVESTATS': {

@@ -12,9 +12,9 @@ export function PveChart() {
     let [fraction, setFraction] = useState('horde')
     let [raid, setRaid] = useState('castle-nathria')
     let dispatch = useDispatch();
-    let pveStats = useSelector(state => state.pve.stats)
-    let pveNames = useSelector(state => state.pve.names)
-    let dataTable = useSelector(state => state.pve.data)
+    let pveStats = useSelector(state => state.pve.pveStats)
+    let pveNames = useSelector(state => state.pve.pveNames)
+    let dataTable = useSelector(state => state.pve.dataTable)
     let loading = useSelector(state => state.pve.loading)
     moment.locale('ru')
     const selectFraction = function (event) {

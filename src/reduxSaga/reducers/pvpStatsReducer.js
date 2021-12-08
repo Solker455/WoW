@@ -1,6 +1,7 @@
 const initialStats = {
     loading: false,
-    data: []
+    data: null,
+    
 }
 
 export const pvpStatsReducer = function (state = initialStats, action) {

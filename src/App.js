@@ -3,7 +3,6 @@ import { PublicRoute } from './routes/public';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { PrivateRoute } from './routes/private';
-import { test } from './api/api';
 
 function App() {
   let token = window.location.search.replace('?access_token=', '');
@@ -13,9 +12,6 @@ function App() {
   }
   let auth = useSelector(state => state.auth.auth)
   if (auth) {
-    test().then(response => {
-      console.log(response)
-    })
     return (
       <div className="App">
         <PrivateRoute />
