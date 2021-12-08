@@ -19,7 +19,7 @@ export const authReducer = function (state = initialAuth, action) {
         case 'LOAD_BATTLETAG': {
             localStorage.battletag = action.battletag
             return {
-                ...state,
+                ...state, 
                 battletag: localStorage.battletag,
             }
         }
