@@ -14,17 +14,15 @@ export function Header() {
         localStorage.removeItem('battletag');
         document.location.href = 'http://localhost:3000';
     }
-    const onClickLogin = function () {//функция входа в аккаунт
-        apiCode()
-    }
-    if (auth) { 
+
+    if (auth) {
         return (<div className='menu-block'>
             <div className='logo'>
             </div>
             <PrivateLink />
             <div className='userBlock'>
-            <div className='battleTag'>{battletag}</div>
-            <Button className='btnPrimary buttonAuth' type="primary" htmlType="submit" size='large' shape='round' onClick={() => onClickLogout()}>Выход</Button>
+                <div className='battleTag'>{battletag}</div>
+                <Button className='btnPrimary buttonAuth' type="primary" htmlType="submit" size='large' shape='round' onClick={onClickLogout}>Выход</Button>
             </div>
         </div>)
     } else {
@@ -32,7 +30,7 @@ export function Header() {
             <div className='logo'>
             </div>
             <PublicLink />
-            <Button className='btnPrimary buttonAuth' type="primary" htmlType="submit" size='large' shape='round' onClick={() => onClickLogin()}>Battle.net</Button>
+            <Button className='btnPrimary buttonAuth' type="primary" htmlType="submit" size='large' shape='round' onClick={apiCode}>Battle.net</Button>
         </div>)
     }
 }

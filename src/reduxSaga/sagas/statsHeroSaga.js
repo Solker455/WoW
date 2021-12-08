@@ -27,7 +27,6 @@ export function* getStatsHeroSaga1(stats) {
         yield put({ type: 'LOAD_STATSHERO1', stats: HeroStats })
         message.info('Персонаж долгое время неактивен, ошибка.')
     }
-
 }
 
 export function* getStatsHeroSaga2(stats) {
