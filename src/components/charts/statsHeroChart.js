@@ -8,31 +8,31 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 export function StatsHeroChart() {
-    let [heroName1, setHeroName1] = useState(),
-        [heroName2, setHeroName2] = useState(),
-        [classTableStats1, setClassTableStats1] = useState('classTableStatsOff'),
-        [classTableStats2, setClassTableStats2] = useState('classTableStatsOff');
+    let [heroName1, setHeroName1] = useState(), //первый вырбранный персонаж для статистики
+        [heroName2, setHeroName2] = useState(), ///второй выбранный персонаж для статистики
+        [classTableStats1, setClassTableStats1] = useState('classTableStatsOff'), //имя класса для первой таблицы
+        [classTableStats2, setClassTableStats2] = useState('classTableStatsOff'); //имя класса для второй таблицы
     let dispatch = useDispatch();
-    let listCharacters = useSelector(state => state.stats.names)
-    let listRealms = useSelector(state => state.stats.realms)
-    let loadingTable1 = useSelector(state => state.stats.loadingStats1)
-    let loadingTable2 = useSelector(state => state.stats.loadingStats2)
-    let heroStats1 = useSelector(state => state.stats.heroStats1)
-    let heroStats2 = useSelector(state => state.stats.heroStats2)
-    let table1, table2;
+    let listCharacters = useSelector(state => state.stats.names) //получение имен персонажей
+    let listRealms = useSelector(state => state.stats.realms) //получение реалма для каждого персонажа
+    let loadingTable1 = useSelector(state => state.stats.loadingStats1) //статус загрузки статистики для первого выбранного персонажа
+    let loadingTable2 = useSelector(state => state.stats.loadingStats2) //статус загрузки статистики для второго выбранного персонажа
+    let heroStats1 = useSelector(state => state.stats.heroStats1) //получение статистики для первого выбранного персонажа
+    let heroStats2 = useSelector(state => state.stats.heroStats2) //получение статистики для второго выбранного персонажа
+    let table1, table2; //таблицы вывода статистики персонажа
 
-    if (loadingTable1) {
+    if (loadingTable1) { //вывод первой таблицы после загрузки статистики
         table1 = <TableStatsHero class={classTableStats1} data={heroStats1} />
     }else{
         table1 = <div className='tableStats1'></div>
     }
-    if (loadingTable2) {
+    if (loadingTable2) {//вывод второй таблицы после загрузки статистики
         table2 = <TableStatsHero class={classTableStats2} data={heroStats2} />
     }else{
         table2 = <div className='tableStats2'></div>
     }
 
-    const selectHero1 = function (event) {
+    const selectHero1 = function (event) { //функция выбора первого персоанажа для показа статистики
         let infoHero = {
             name: listCharacters[event].toLowerCase(),
             realm: listRealms[event]
@@ -41,7 +41,7 @@ export function StatsHeroChart() {
         setHeroName1(listCharacters[event])
         setClassTableStats1('tableStats1')
     }
-    const selectHero2 = function (event) {
+    const selectHero2 = function (event) { //функция выбора второго персонажа для показа статистики
         let infoHero = {
             name: listCharacters[event].toLowerCase(),
             realm: listRealms[event]
@@ -51,7 +51,7 @@ export function StatsHeroChart() {
         setClassTableStats2('tableStats2')
     }
 
-    let option = {
+    let option = { //опции для графика
         legend: {
             data: [heroName1, heroName2],
             textStyle: {
@@ -102,7 +102,7 @@ export function StatsHeroChart() {
         ]
     };
     useEffect(() => {
-        dispatch({ type: 'GET_LISTHERO' });
+        dispatch({ type: 'GET_LISTHERO' }); //получение списка персонажей в redux
     }, [dispatch])
 
     return (

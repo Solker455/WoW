@@ -9,25 +9,26 @@ import { useDispatch, useSelector } from "react-redux";
 const { Option } = Select;
 
 export function PveChart() {
-    let [fraction, setFraction] = useState('horde')
-    let [raid, setRaid] = useState('castle-nathria')
+    let [fraction, setFraction] = useState('horde') //фракция статистики
+    let [raid, setRaid] = useState('castle-nathria') //рейд статистики
     let dispatch = useDispatch();
-    let pveStats = useSelector(state => state.pve.pveStats)
-    let pveNames = useSelector(state => state.pve.pveNames)
-    let dataTable = useSelector(state => state.pve.dataTable)
-    let loading = useSelector(state => state.pve.loading)
+    let pveStats = useSelector(state => state.pve.pveStats) //получение рангов гильдии
+    let pveNames = useSelector(state => state.pve.pveNames) //получение имен гильдий
+    let dataTable = useSelector(state => state.pve.dataTable) //получение статистики для таблицы
+    let loading = useSelector(state => state.pve.loading) //получение загрузки для таблицы
     moment.locale('ru')
-    const selectFraction = function (event) {
+    const selectFraction = function (event) { //функция выбора фракции для статистики
         setFraction(event)
     }
-    const selectRaid = function (event) {
+    const selectRaid = function (event) { //функция выбора рейда для статистики
         setRaid(event)
     }
 
     useEffect(() => {
-        dispatch({ type: 'GET_PVESTATS', fraction, raid });
+        dispatch({ type: 'GET_PVESTATS', fraction, raid }); //получение всей pve статистики в redux
     }, [dispatch, fraction, raid]);
-    let option = {
+
+    let option = { //опции для графика
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -72,7 +73,7 @@ export function PveChart() {
         ]
     };
 
-    const columns = [
+    const columns = [ //опции для таблицы
         {
             title: 'Ранг',
             dataIndex: 'rank',

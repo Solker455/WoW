@@ -6,19 +6,19 @@ import { useDispatch, useSelector } from "react-redux";
 const { Option } = Select;
 
 export function PvpChart() {
-    let [pvpLadder, setPvpLadder] = useState('2v2')
+    let [pvpLadder, setPvpLadder] = useState('2v2') //ладдер статистики
     let dispatch = useDispatch();
-    let pvpStats = useSelector(state => state.pvp.pvpStats)
-    let pvpName = useSelector(state => state.pvp.pvpNames)
+    let pvpStats = useSelector(state => state.pvp.pvpStats) //получение рейтинга статистики
+    let pvpName = useSelector(state => state.pvp.pvpNames) //получение имен лидеров
     useEffect(() => {
-        dispatch({ type: 'GET_PVPSTATS', pvpLadder });
+        dispatch({ type: 'GET_PVPSTATS', pvpLadder }); //получение всей pvp статистики в redux
     }, [dispatch, pvpLadder]);
 
-    const selectPvpLadder = function (event) {
+    const selectPvpLadder = function (event) { //функция выбора ладдера статистики
         setPvpLadder(event)
     }
 
-    let option = {
+    let option = { //опции для графика
         tooltip: {
             trigger: 'axis',
             axisPointer: {

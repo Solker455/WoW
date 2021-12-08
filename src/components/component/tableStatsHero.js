@@ -2,16 +2,15 @@ import React from "react"
 import { Table } from 'antd';
 
 export function TableStatsHero(props) {
-    let listNameStats = ['Выносливость', 'Скорость', 'Искусность', 'Универсальность', 'Критический удар', 'Здоровье']
-    let data;
-    data = listNameStats.map((item, key) => {
+    let listNameStats = ['Выносливость', 'Скорость', 'Искусность', 'Универсальность', 'Критический удар', 'Здоровье'] //список наименования характеристик для таблицы
+    let data = listNameStats.map((item, key) => { //построение данных для таблицы
         return {
             name: item,
             value: props.data[key]
         }
     })
 
-    const columns = [
+    const columns = [ //опции для таблицы
         {
             title: 'Наименования',
             dataIndex: 'name',

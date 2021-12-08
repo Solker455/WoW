@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux';
 const { Option } = Select;
 
 export function SelectHero(props) {
-    let listCharacters = useSelector(state => state.stats.names)
-    let loading = useSelector(state => state.stats.loadingList)
-    let options;
-    if (loading) {
+    let listCharacters = useSelector(state => state.stats.names) //получение списка персонажей
+    let loading = useSelector(state => state.stats.loadingList) //получение статуса загрузки списка персонажей
+    let options; //опции вывода списка для select
+    if (loading) { //вывод списка select после загрузки списка персонажей
         options = listCharacters.map((item, key) => {
             return (<Option className='option' key={key} value={key}>{item}</Option>)
         })

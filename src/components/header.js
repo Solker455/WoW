@@ -6,18 +6,18 @@ import { Button } from "antd";
 import { apiCode } from "../api/api";
 
 export function Header() {
-    let auth = useSelector(state => state.auth.auth)
-    let battletag = useSelector(state => state.auth.battletag)
-    const onClickLogout = function () {
+    let auth = useSelector(state => state.auth.auth) //получение статуса авторизации
+    let battletag = useSelector(state => state.auth.battletag) //получение имени аккаунта battle.net
+    const onClickLogout = function () { //функция выхода из аккаунта
         localStorage.removeItem('token');
         localStorage.removeItem('auth');
         localStorage.removeItem('battletag');
         document.location.href = 'http://localhost:3000';
     }
-    const onClickLogin = function () {
+    const onClickLogin = function () {//функция входа в аккаунт
         apiCode()
     }
-    if (auth) {
+    if (auth) { 
         return (<div className='menu-block'>
             <div className='logo'>
             </div>
